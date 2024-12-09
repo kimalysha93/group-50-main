@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Profile{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h2 id="welcome-header">Welcome {{ user.user_name }}!</h2>
+
+
+<h2>Here are all available products</h2>
+
+<div id="products">
+    <table>
+        <tbody>
+            <tr>
+                <td><b>Name</b></td>
+                <td><b>Price</b></td>
+                <td><b>Quantity</b></td>
+                <td><b>Description</b></td>
+                <td><b>Last Date Modified</b></td>
+                <td><b>Owner</b></td>
+                <td><b>Update</b></td>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.title }}</td>
+                <td>${{ "{:.2f}".format(product.price / 100) }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.last_modified_date }}</td>
+                <td>{{ product.owner_email }}</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="product_title" id="product_title" value="{{ product.title }}">
+                        <input class="btn btn-primary" type="submit" value="Update Product" name="{{ product.title }}">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<hr></hr>
+<div>
+    <p>To start shopping, click here: 
+       <a href='/shop'>Shop</a></p>
+</div>
+<div>
+    <p>To create new products, click here: 
+       <a href='/product-creation'>Create a Product</a></p>
+</div>
+<div>
+    <p>To update profile, click here: 
+       <a href='/update-profile'>Update Profile</a></p>
+</div>
+<div>
+    <p>To log out of your account, click here: <a href='/logout'>Logout</a></p>
+</div>
+{% endblock %}

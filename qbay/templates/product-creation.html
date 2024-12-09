@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Create a Product{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h4 id='message'>{{message}}</h4>
+<form method="post">
+  <div class="form-group">
+    <label for="product-name">Title</label>
+    <input class="form-control" type="text" name="product-name" id="product-name" required>
+    <label for="description">Description</label>
+    <input class="form-control" type="text" name="description" id="description" required>
+    <label for="price">Price</label>
+    <input class="form-control" type="number" name="price" id="price" required>
+    <label for="quantity">Quantity</label>
+    <input class="form-control" min="0" value="1" type="number" name="quantity" id="quantity" required>
+    <input class="btn btn-primary" type="submit" name="submit-button" value="Submit">
+  </div>
+</form>
+<hr></hr>
+<div>
+  <p>To return to the home page, click here: <a href='/'>Home</a></p>
+</div>
+<div>
+  <p>To log out of your account, click here: <a href='/logout'>Logout</a></p>
+</div>
+{% endblock %}

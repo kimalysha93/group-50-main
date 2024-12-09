@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Shop{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ user.user_name }}, your balance is: ${{ "{:.2f}".format(user.balance / 100) }}</h2>
+<h2>Here are all the available products to buy</h2>
+<h4 id='message'>{{message}}</h4>
+<div id="products">
+    <table>
+        <tbody>
+            <tr>
+                <td><b>Name</b></td>
+                <td><b>Price</b></td>
+                <td><b>Quantity</b></td>
+                <td><b>Description</b></td>
+                <td><b>Last Date Modified</b></td>
+                <td><b>Owner</b></td>
+                <td><b>Buy</b></td>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.title }}</td>
+                <td>${{ "{:.2f}".format(product.price / 100) }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.last_modified_date }}</td>
+                <td>{{ product.owner_email }}</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="product_title" id="product_title" value="{{ product.title }}">
+                        <input class="btn btn-primary" type="submit" value="Buy now" name="{{ product.title }}">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<hr></hr>
+<div>
+    <p>To return to the home page, click here: 
+       <a href='/'>Home</a></p>
+</div>
+<div>
+    <p>To log out of your account, click here: <a href='/logout'>Logout</a></p>
+</div>
+{% endblock %}
